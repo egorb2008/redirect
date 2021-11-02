@@ -12,11 +12,13 @@ class Calculator(QWidget):
         self.hbox_line = QHBoxLayout()
         self.hbox1 = QHBoxLayout()
         self.hbox_res = QHBoxLayout()
+        self.hbox_clear = QHBoxLayout()
         self.vbox = QVBoxLayout()
 
         self.vbox.addLayout(self.hbox_line)
         self.vbox.addLayout(self.hbox1)
         self.vbox.addLayout(self.hbox_res)
+        self.vbox.addLayout(self.hbox_clear)
 
         self.line = QLineEdit(self)
 
@@ -37,6 +39,7 @@ class Calculator(QWidget):
         self.b_divide = QPushButton("/", self)
         self.b_multiply = QPushButton("*", self)
         self.b_res = QPushButton("=", self)
+        self.clear = QPushButton("Очистить поле ввода", self)
 
         self.hbox_line.addWidget(self.line)
         self.hbox1.addWidget(self.b_1)
@@ -54,6 +57,7 @@ class Calculator(QWidget):
         self.hbox1.addWidget(self.b_divide)
         self.hbox1.addWidget(self.b_multiply)
         self.hbox_res.addWidget(self.b_res)
+        self.hbox_clear.addWidget(self.clear)
 
         self.setLayout(self.vbox)
 
@@ -72,6 +76,7 @@ class Calculator(QWidget):
         self.b_divide.clicked.connect(lambda: self.operation("/"))
         self.b_multiply.clicked.connect(lambda: self.operation("*"))
         self.b_res.clicked.connect(self.result)
+        self.clear.clicked.connect(self.clearWidget)
 
     def addText(self, param):
         line = self.line.text()
@@ -86,6 +91,17 @@ class Calculator(QWidget):
         self.num2 = self.line.text()
         if self.op == "+":
             self.line.setText(str(int(self.num1) + int(self.num2)))
+        if self.op == "-":
+            self.line.setText(str(int(self.num1) - int(self.num2)))
+        if self.op == "*":
+            self.line.setText(str(int(self.num1) * int(self.num2)))
+        if self.op == "/":
+            if int(self.num2) == 0:
+                self.line.setText(str("На ноль делить нельзя."))
+            else:
+                self.line.setText(str(int(self.num1) / int(self.num2)))
+    def clearWidget(self):
+        self.line.setText("")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
