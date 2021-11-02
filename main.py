@@ -35,11 +35,17 @@ class Calculator(QWidget):
         self.b_0 = QPushButton("0", self)
         # задаём кнопки операций
         self.b_plus = QPushButton("+", self)
+        # self.b_plus.setStyleSheet('background: rgb(32,178,170);')
         self.b_minus = QPushButton("-", self)
+        # self.b_minus.setStyleSheet('background: rgb(32,178,170);')
         self.b_divide = QPushButton("/", self)
+        # self.b_divide.setStyleSheet('background: rgb(32,178,170);')
         self.b_multiply = QPushButton("*", self)
+        # self.b_multiply.setStyleSheet('background: rgb(32,178,170);')
         self.b_res = QPushButton("=", self)
-        self.clear = QPushButton("Очистить поле ввода", self)
+        self.clear= QPushButton("Очистить поле ввода", self)
+
+        self.clear.setStyleSheet('background: rgb(139,0,0);')
 
         self.hbox_line.addWidget(self.line)
         self.hbox1.addWidget(self.b_1)
